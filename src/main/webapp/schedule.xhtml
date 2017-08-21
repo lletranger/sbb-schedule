@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns:h="http://xmlns.jcp.org/jsf/html">
+<h:head>
+    <title>Schedule</title>
+    <meta http-equiv="Content-Type"	content="application/xhtml+xml; charset=UTF-8" />
+
+</h:head>
+
+<h:body>
+    Schedule for station #{scheduleController.getSchedule().name}:
+
+    <h:form>
+
+        <h:dataTable value="#{scheduleController.getSchedule().from}" var="board">
+            <h:column>From station</h:column>
+            <h:column>#{board.name}</h:column>
+            <h:column>#{board.from}</h:column>
+        </h:dataTable>
+
+        <h:dataTable value="#{scheduleController.getSchedule().to}" var="board">
+            <h:column>To station:</h:column>
+            <h:column>#{board.name}</h:column>
+            <h:column>#{board.to}</h:column>
+        </h:dataTable>
+
+    </h:form>
+</h:body>
+</html>
