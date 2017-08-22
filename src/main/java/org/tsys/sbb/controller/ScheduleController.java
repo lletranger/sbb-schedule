@@ -34,4 +34,8 @@ public class ScheduleController {
 
         return response.getEntity(ScheduleDto.class);
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }
