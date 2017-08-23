@@ -58,10 +58,15 @@
       <artifactId>lombok</artifactId>
       <version>1.16.16</version>
     </dependency>
+    <dependency>
+      <groupId>org.richfaces</groupId>
+      <artifactId>richfaces-a4j</artifactId>
+      <version>4.5.17.Final</version>
+    </dependency>
       <dependency>
-          <groupId>javax</groupId>
-          <artifactId>javaee-api</artifactId>
-          <version>7.0</version>
+          <groupId>org.richfaces</groupId>
+          <artifactId>richfaces</artifactId>
+          <version>4.5.17.Final</version>
       </dependency>
 
   </dependencies>

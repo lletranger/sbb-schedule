@@ -8,6 +8,7 @@ import com.sun.jersey.api.client.config.DefaultClientConfig;
 import com.sun.jersey.api.json.JSONConfiguration;
 import org.tsys.sbb.dto.ScheduleDto;
 
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.inject.Named;
 import javax.ws.rs.core.MediaType;
@@ -16,9 +17,12 @@ import javax.ws.rs.core.MediaType;
 @Stateless
 public class ScheduleController {
 
-    private int id = 2;
+    private int id = 4;
 
-    public ScheduleDto getSchedule() {
+    @EJB
+    private ScheduleDto scheduleDto;
+
+    public ScheduleDto recieveSchedule() {
 
         ClientConfig clientConfig = new DefaultClientConfig();
         clientConfig.getFeatures().put(JSONConfiguration.FEATURE_POJO_MAPPING, Boolean.TRUE);
@@ -32,10 +36,15 @@ public class ScheduleController {
                 .type(MediaType.APPLICATION_JSON)
                 .get(ClientResponse.class);
 
-        return response.getEntity(ScheduleDto.class);
+        ScheduleDto responseEntity = response.getEntity(ScheduleDto.class);
+
+        if (scheduleDto != responseEntity) {
+            scheduleDto = responseEntity;
+        }
+        return scheduleDto;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public ScheduleDto getScheduleDto() {
+        return scheduleDto;
     }
 }

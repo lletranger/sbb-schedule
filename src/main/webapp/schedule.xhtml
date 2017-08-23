@@ -1,83 +1,90 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<html xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:a4j="http://richfaces.org/a4j">
 
 <h:head>
     <title>Schedule</title>
-    <meta http-equiv="Content-Type"	content="application/xhtml+xml; charset=UTF-8" />
-
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8"/>
+    <meta http-equiv="Refresh" content="60" />
 </h:head>
 
 <h:body>
-    Schedule for station #{scheduleController.getSchedule().name}:
+    <a4j:region>
+        <h:form>
+            <a4j:poll id="poll" interval="5000" enabled="true" reRender="deps,arrs" />
+        </h:form>
+    </a4j:region>
+
+    <h:outputText value="Schedule for station #{scheduleController.recieveSchedule().name}:"/>
     <h:form>
-        Departures
-        <h:dataTable value="#{scheduleController.getSchedule().from}" var="board">
+        <h:outputText value="Departures:"/>
+        <h:dataTable id="deps" value="#{scheduleController.scheduleDto.from}" var="board">
             <h:column>
                 <f:facet name="header">
-                    <h:outputText value="Board name" />
+                    <h:outputText value="Board name"/>
                 </f:facet>
-                <h:outputText value="#{board.name}" />
+                <h:outputText value="#{board.name}"/>
             </h:column>
 
             <h:column>
                 <f:facet name="header">
-                    <h:outputText value="Departure time" />
+                    <h:outputText value="Departure time"/>
                 </f:facet>
-                <h:outputText value="#{board.departure}" />
+                <h:outputText value="#{board.departure}"/>
             </h:column>
 
             <h:column>
                 <f:facet name="header">
-                    <h:outputText value="Destination" />
+                    <h:outputText value="Destination"/>
                 </f:facet>
-                <h:outputText value="#{board.to}" />
+                <h:outputText value="#{board.to}"/>
             </h:column>
 
             <h:column>
                 <f:facet name="header">
-                    <h:outputText value="Status" />
+                    <h:outputText value="Status"/>
                 </f:facet>
-                <h:outputText value="#{board.status}" />
+                <h:outputText value="#{board.status}"/>
             </h:column>
         </h:dataTable>
 
-        Arrivals
-        <h:dataTable value="#{scheduleController.getSchedule().to}" var="board">
+        <h:outputText value="Arrivals:"/>
+        <h:dataTable id="arrs" value="#{scheduleController.scheduleDto.to}" var="board">
             <h:column>
                 <f:facet name="header">
-                    <h:outputText value="Board name" />
+                    <h:outputText value="Board name"/>
                 </f:facet>
-                <h:outputText value="#{board.name}" />
+                <h:outputText value="#{board.name}"/>
             </h:column>
 
             <h:column>
                 <f:facet name="header">
-                    <h:outputText value="Expected arrival" />
+                    <h:outputText value="Expected arrival"/>
                 </f:facet>
-                <h:outputText value="#{board.expectedArrival}" />
+                <h:outputText value="#{board.expectedArrival}"/>
             </h:column>
 
             <h:column>
                 <f:facet name="header">
-                    <h:outputText value="Origin" />
+                    <h:outputText value="Origin"/>
                 </f:facet>
-                <h:outputText value="#{board.from}" />
+                <h:outputText value="#{board.from}"/>
             </h:column>
 
             <h:column>
                 <f:facet name="header">
-                    <h:outputText value="Arrival" />
+                    <h:outputText value="Arrival"/>
                 </f:facet>
-                <h:outputText value="#{board.arrival}" />
+                <h:outputText value="#{board.arrival}"/>
             </h:column>
 
             <h:column>
                 <f:facet name="header">
-                    <h:outputText value="Status" />
+                    <h:outputText value="Status"/>
                 </f:facet>
-                <h:outputText value="#{board.status}" />
+                <h:outputText value="#{board.status}"/>
             </h:column>
         </h:dataTable>
 
