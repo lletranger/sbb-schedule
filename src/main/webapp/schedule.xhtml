@@ -1,26 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:a4j="http://richfaces.org/a4j">
+      xmlns:f="http://java.sun.com/jsf/core">
 
 <h:head>
     <title>Schedule</title>
     <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8"/>
-    <meta http-equiv="Refresh" content="60" />
 </h:head>
 
 <h:body>
-    <a4j:region>
-        <h:form>
-            <a4j:poll id="poll" interval="5000" enabled="true" reRender="deps,arrs" />
-        </h:form>
-    </a4j:region>
 
-    <h:outputText value="Schedule for station #{scheduleController.recieveSchedule().name}:"/>
-    <h:form>
-        <h:outputText value="Departures:"/>
-        <h:dataTable id="deps" value="#{scheduleController.scheduleDto.from}" var="board">
+    <h:form id="scheduleForm">
+
+        <h:outputText value="Schedule for station #{scheduleController.recieveSchedule().name}:"/><br/><br/>
+        <h:outputText value="Departures:"/><br/>
+        <h:outputText value=""/>
+
+        <h:dataTable value="#{scheduleController.scheduleDto.from}" var="board">
+
             <h:column>
                 <f:facet name="header">
                     <h:outputText value="Board name"/>
@@ -48,10 +45,13 @@
                 </f:facet>
                 <h:outputText value="#{board.status}"/>
             </h:column>
+
         </h:dataTable>
 
-        <h:outputText value="Arrivals:"/>
-        <h:dataTable id="arrs" value="#{scheduleController.scheduleDto.to}" var="board">
+        <br/><h:outputText value="Arrivals:"/><br/>
+
+        <h:dataTable value="#{scheduleController.scheduleDto.to}" var="board">
+
             <h:column>
                 <f:facet name="header">
                     <h:outputText value="Board name"/>
@@ -86,8 +86,23 @@
                 </f:facet>
                 <h:outputText value="#{board.status}"/>
             </h:column>
+
         </h:dataTable>
 
     </h:form>
+
+    <h:form id="hiddenForm" style="display:none">
+        <h:commandButton id="updateSchedule">
+            <f:ajax render=":scheduleForm" />
+        </h:commandButton>
+    </h:form>
+
 </h:body>
+
+<h:outputScript target="body">
+    setInterval(function() {
+        document.getElementById("hiddenForm:updateSchedule").click();
+    }, 3000);
+</h:outputScript>
+
 </html>

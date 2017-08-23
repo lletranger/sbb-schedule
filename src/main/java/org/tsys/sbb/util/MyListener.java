@@ -3,6 +3,7 @@ package org.tsys.sbb.util;
 import org.tsys.sbb.controller.ScheduleController;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.ejb.EJB;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
@@ -18,15 +19,15 @@ import java.util.Hashtable;
 @Singleton
 public class MyListener implements MessageListener, Serializable {
 
+    QueueConnection connection;
+    QueueSession session;
+    QueueReceiver receiver;
+
     @EJB
     private ScheduleController scheduleController;
 
     @PostConstruct
     public void receive() {
-
-        QueueConnection connection;
-        QueueSession session;
-        QueueReceiver receiver;
 
         Hashtable<String, String> props = new Hashtable<>();
         props.put("java.naming.factory.initial", "org.apache.activemq.jndi.ActiveMQInitialContextFactory");
@@ -35,26 +36,36 @@ public class MyListener implements MessageListener, Serializable {
         props.put("connectionFactoryNames", "queueCF");
 
         try {
+
             Context context = new InitialContext(props);
             QueueConnectionFactory connectionFactory = (QueueConnectionFactory) context.lookup("queueCF");
             Queue queue = (Queue) context.lookup("js-queue");
-
             connection = connectionFactory.createQueueConnection();
             connection.start();
-
             session = connection.createQueueSession(false, QueueSession.AUTO_ACKNOWLEDGE);
-
             receiver = session.createReceiver(queue);
-
             receiver.setMessageListener(new MyListener());
 
-        } catch (NamingException | JMSException e) {
-            System.out.println("Error during message recieving");
+        } catch (Exception e) {
+            System.out.println("Error during message receiving");
         }
     }
 
+    @Override
     public void onMessage(Message message) {
         scheduleController.recieveSchedule();
         System.out.println("Got a message!");
+    }
+
+    @PreDestroy
+    public void destroy() {
+
+        try {
+            receiver.close();
+            session.close();
+            connection.close();
+        } catch (JMSException e) {
+            System.out.println("Error during listener destroying");
+        }
     }
 }
