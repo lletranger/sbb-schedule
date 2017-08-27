@@ -8,12 +8,14 @@ import com.sun.jersey.api.client.config.DefaultClientConfig;
 import com.sun.jersey.api.json.JSONConfiguration;
 import org.tsys.sbb.dto.StationsDto;
 
-import javax.ejb.Stateless;
+import javax.ejb.Singleton;
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
 import javax.ws.rs.core.MediaType;
 
 @Named("stationController")
-@Stateless
+@Singleton
+@ApplicationScoped
 public class StationController {
 
     public StationsDto getStations() {

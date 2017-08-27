@@ -12,6 +12,7 @@
 
         <h:dataTable id="top" value="#{stationController.getStations().stations}" var="station">
             <h:column><a href="schedule.xhtml">#{station.name}</a></h:column>
+            <!--<h:button action="#{scheduleController.setId(station.id)}" />-->
         </h:dataTable>
 
     </h:form>

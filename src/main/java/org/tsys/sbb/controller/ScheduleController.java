@@ -10,13 +10,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.tsys.sbb.dto.ScheduleDto;
 
-import javax.ejb.Stateless;
+import javax.ejb.Singleton;
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
 import javax.ws.rs.core.MediaType;
 import java.util.Calendar;
 
 @Named("scheduleController")
-@Stateless
+@Singleton
+@ApplicationScoped
 public class ScheduleController {
 
     private int id = 4;
@@ -46,7 +48,7 @@ public class ScheduleController {
         logger.info("Updated");
     }
 
-    public ScheduleDto getSchedule() {
+    public ScheduleDto getNewScheduleDto(){
 
         if (Calendar.getInstance().get(Calendar.SECOND) < 1) {
             logger.info("Time to update!");
@@ -58,5 +60,14 @@ public class ScheduleController {
 
     public ScheduleDto getScheduleDto() {
         return scheduleDto;
+    }
+
+    public ScheduleController() {
+        logger.info("Creating controller");
+        receiveSchedule();
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

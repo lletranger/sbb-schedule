@@ -12,7 +12,7 @@
 
     <h:form id="scheduleForm">
 
-        <h:outputText value="Schedule for station #{scheduleController.getSchedule().name}:"/><br/><br/>
+        <h:outputText value="Schedule for station #{scheduleController.getNewScheduleDto().name}:"/><br/><br/>
         <h:outputText value="Departures:"/><br/>
         <h:outputText value=""/>
 
@@ -87,11 +87,11 @@
                 <h:outputText value="#{board.status}"/>
             </h:column>
 
-            <a4j:poll interval="900" render=":scheduleForm"/>
-
         </h:dataTable>
 
     </h:form>
+
+    <a4j:poll interval="900" render=":scheduleForm"/>
 
 </h:body>
 

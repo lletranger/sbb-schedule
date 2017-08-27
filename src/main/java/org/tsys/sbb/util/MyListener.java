@@ -8,6 +8,7 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.ejb.*;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.jms.*;
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -15,6 +16,7 @@ import java.util.Hashtable;
 
 @Startup
 @Singleton
+@ApplicationScoped
 public class MyListener implements MessageListener {
 
     QueueConnection connection;
