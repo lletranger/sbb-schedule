@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core" xmlns:a4j="http://richfaces.org/a4j">
 
 <h:head>
     <title>Schedule</title>
@@ -12,11 +12,11 @@
 
     <h:form id="scheduleForm">
 
-        <h:outputText value="Schedule for station #{scheduleController.recieveSchedule().name}:"/><br/><br/>
+        <h:outputText value="Schedule for station #{scheduleController.getSchedule().name}:"/><br/><br/>
         <h:outputText value="Departures:"/><br/>
         <h:outputText value=""/>
 
-        <h:dataTable value="#{scheduleController.scheduleDto.from}" var="board">
+        <h:dataTable value="#{scheduleController.getScheduleDto().from}" var="board">
 
             <h:column>
                 <f:facet name="header">
@@ -50,7 +50,7 @@
 
         <br/><h:outputText value="Arrivals:"/><br/>
 
-        <h:dataTable value="#{scheduleController.scheduleDto.to}" var="board">
+        <h:dataTable value="#{scheduleController.getScheduleDto().to}" var="board">
 
             <h:column>
                 <f:facet name="header">
@@ -87,22 +87,12 @@
                 <h:outputText value="#{board.status}"/>
             </h:column>
 
+            <a4j:poll interval="900" render=":scheduleForm"/>
+
         </h:dataTable>
 
     </h:form>
 
-    <h:form id="hiddenForm" style="display:none">
-        <h:commandButton id="updateSchedule">
-            <f:ajax render=":scheduleForm" />
-        </h:commandButton>
-    </h:form>
-
 </h:body>
-
-<h:outputScript target="body">
-    setInterval(function() {
-        document.getElementById("hiddenForm:updateSchedule").click();
-    }, 3000);
-</h:outputScript>
 
 </html>

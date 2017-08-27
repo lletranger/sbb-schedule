@@ -6,12 +6,14 @@ import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 import com.sun.jersey.api.json.JSONConfiguration;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.tsys.sbb.dto.ScheduleDto;
 
-import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.inject.Named;
 import javax.ws.rs.core.MediaType;
+import java.util.Calendar;
 
 @Named("scheduleController")
 @Stateless
@@ -19,14 +21,14 @@ public class ScheduleController {
 
     private int id = 4;
 
-    @EJB
     private ScheduleDto scheduleDto;
 
-    public ScheduleDto recieveSchedule() {
+    private static final Logger logger = LoggerFactory.getLogger(ScheduleController.class);
+
+    public void receiveSchedule() {
 
         ClientConfig clientConfig = new DefaultClientConfig();
         clientConfig.getFeatures().put(JSONConfiguration.FEATURE_POJO_MAPPING, Boolean.TRUE);
-
         Client client = Client.create(clientConfig);
         String url = "http://localhost:8000/schedule/station/" + id;
         WebResource webResource = client.resource(url);
@@ -36,11 +38,21 @@ public class ScheduleController {
                 .type(MediaType.APPLICATION_JSON)
                 .get(ClientResponse.class);
 
-        ScheduleDto responseEntity = response.getEntity(ScheduleDto.class);
-
-        if (scheduleDto != responseEntity) {
-            scheduleDto = responseEntity;
+        ScheduleDto newScheduleDto = response.getEntity(ScheduleDto.class);
+        if (newScheduleDto != null) {
+            scheduleDto = newScheduleDto;
         }
+
+        logger.info("Updated");
+    }
+
+    public ScheduleDto getSchedule() {
+
+        if (Calendar.getInstance().get(Calendar.SECOND) < 1) {
+            logger.info("Time to update!");
+            receiveSchedule();
+        }
+
         return scheduleDto;
     }
 
