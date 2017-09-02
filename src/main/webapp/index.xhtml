@@ -3,18 +3,61 @@
 <html xmlns:h="http://java.sun.com/jsf/html">
 
 <h:head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <h:outputStylesheet name="css/bootstrap.css" />
+    <h:outputStylesheet name="css/animate.css" />
+    <h:outputStylesheet name="css/style.css" />
+    <h:outputStylesheet name="css/bootstrap.css" />
+    <h:outputStylesheet name="css/blue.css" />
+    <h:outputStylesheet name="font-awesome/css/font-awesome.css" />
     <title>Stations</title>
-    <meta http-equiv="Content-Type"	content="application/xhtml+xml; charset=UTF-8" />
+
+        <h:outputStylesheet>
+            body {
+                background: linear-gradient(90deg, rgb(255, 255, 255) 10%, #ffffff 90%);
+                color: #49a827;
+                font-family: 'Helvetica', sans-serif;
+            }
+
+            table.sortable thead {
+                background-color: rgba(255, 227, 1, 0);
+                color: #545454;
+                font-size: 20px;
+                font-weight: bold;
+                cursor: default;
+
+            }
+
+            table.sortable th {
+                text-align: center;
+                height: 50px;
+
+            }
+
+            table.sortable td {
+                text-align: center;
+                color: #545454;
+                height: 40px;
+                width: 85px;
+            }
+
+        </h:outputStylesheet>
 </h:head>
 
 <h:body>
-    <h:form>
-
-        <h:dataTable id="top" value="#{stationController.getStations().stations}" var="station">
-            <h:column><a href="schedule.xhtml">#{station.name}</a></h:column>
-            <!--<h:button action="#{scheduleController.setId(station.id)}" />-->
-        </h:dataTable>
-
-    </h:form>
+    <div class="content">
+        <div class="container">
+        <h:form>
+            <h:dataTable id="top" value="#{stationController.getStations().stations}" var="station">
+                <h:column>
+                    <h:commandLink action="#{scheduleController.setId(station.id)}">
+                        <h:outputText value="#{station.name}" rendered="#{true}"/>
+                    </h:commandLink>
+                </h:column>
+            </h:dataTable>
+        </h:form>
+        </div>
+    </div>
 </h:body>
+
 </html>

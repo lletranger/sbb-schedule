@@ -17,7 +17,7 @@ import java.util.Hashtable;
 @Startup
 @Singleton
 @ApplicationScoped
-public class MyListener implements MessageListener {
+public class Listener implements MessageListener {
 
     QueueConnection connection;
     QueueSession session;
@@ -26,7 +26,7 @@ public class MyListener implements MessageListener {
     @EJB
     private ScheduleController scheduleController;
 
-    private static final Logger logger = LoggerFactory.getLogger(MyListener.class);
+    private static final Logger logger = LoggerFactory.getLogger(Listener.class);
 
 
     @PostConstruct

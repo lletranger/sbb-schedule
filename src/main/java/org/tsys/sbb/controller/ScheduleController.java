@@ -67,7 +67,10 @@ public class ScheduleController {
         receiveSchedule();
     }
 
-    public void setId(int id) {
+    public String setId(int id) {
         this.id = id;
+        logger.info("ID changed to " + id);
+        receiveSchedule();
+        return "schedule";
     }
 }
