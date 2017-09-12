@@ -24,4 +24,9 @@ public @Data class BoardDto implements Serializable {
     private int to_id;
     private int train_id;
     private String status;
+
+    @Override
+    public String toString() {
+        return "To /".concat(to).concat(" departing at ").concat(departure);
+    }
 }
