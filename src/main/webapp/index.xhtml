@@ -5,25 +5,29 @@
 
 <h:head>
     <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8"/>
-    <h:outputStylesheet name="css/bootstrap.css" />
-    <h:outputStylesheet name="css/animate.css" />
-    <h:outputStylesheet name="css/style.css" />
-    <h:outputStylesheet name="css/bootstrap.css" />
-    <h:outputStylesheet name="css/blue.css" />
-    <h:outputStylesheet name="font-awesome/css/font-awesome.css" />
+    <h:outputStylesheet library="css" name="mystyle.css"/>
+    <h:outputStylesheet library="css" name="animate.css"/>
+    <h:outputStylesheet library="css" name="style.css"/>
+    <h:outputStylesheet library="css" name="blue.css"/>
+    <h:outputStylesheet library="css" name="login-style.css"/>
     <title>Stations</title>
-</h:head>
 
+</h:head>
 <h:body>
-    <h:form>
-        <h:dataTable value="#{stationController.getStations().stations}" var="station" style="display:block; text-align:center">
-            <h:column>
-                <h:commandLink action="#{scheduleController.setId(station.id)}">
-                    <h:outputText styleClass="" value="#{station.name}" rendered="#{true}"/>
-                </h:commandLink>
-            </h:column>
-        </h:dataTable>
-    </h:form>
+    <h1>Choose a station to get its schedule</h1>
+    <h:panelGrid style="margin: 0 auto;">
+        <h:form styleClass="myForm">
+            <h:dataTable value="#{stationController.getStations().stations}" var="station"
+                         styleClass="myTable"
+                         rowClasses="myRow">
+                <h:column>
+                    <h:commandLink action="#{scheduleController.setId(station.id)}">
+                        <h:outputText value="#{station.name}" rendered="#{true}"/>
+                    </h:commandLink>
+                </h:column>
+            </h:dataTable>
+        </h:form>
+    </h:panelGrid>
 </h:body>
 
 </html>

@@ -66,8 +66,11 @@ public class TelegramBot extends TelegramLongPollingBot {
                 names.clear();
 
                 for (StationDto stationDto : dtos) {
-                    names.add(stationDto.getName());
-                    map.put(stationDto.getName(), stationDto.getId());
+
+                    String str = stationDto.getName().substring(0, 1)
+                            .concat(stationDto.getName().substring(1).toLowerCase());
+                    names.add(str);
+                    map.put(str, stationDto.getId());
                 }
 
                 StringBuilder stations = new StringBuilder("");

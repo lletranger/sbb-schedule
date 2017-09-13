@@ -30,6 +30,12 @@ public class StationController {
                 .accept(MediaType.APPLICATION_JSON)
                 .type(MediaType.APPLICATION_JSON)
                 .get(ClientResponse.class);
-        return response.getEntity(StationsDto.class);
+
+        StationsDto stationsDto = response.getEntity(StationsDto.class);
+
+        stationsDto.getStations().forEach(stationDto ->
+                stationDto.setName(stationDto.getName().toUpperCase()));
+
+        return stationsDto;
     }
 }

@@ -4,95 +4,93 @@
       xmlns:f="http://java.sun.com/jsf/core" xmlns:a4j="http://richfaces.org/a4j">
 
 <h:head>
-    <title>Schedule</title>
     <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8"/>
+    <h:outputStylesheet library="css" name="schedulestyle.css"/>
+    <h:outputStylesheet library="css" name="animate.css"/>
+    <h:outputStylesheet library="css" name="style.css"/>
+    <h:outputStylesheet library="css" name="blue.css"/>
+    <h:outputStylesheet library="css" name="login-style.css"/>
+    <title>Schedule</title>
+
 </h:head>
-
 <h:body>
+    <h:form id="myForm">
+    <h1>Schedule for station #{scheduleController.getNewScheduleDto().name}:</h1>
+    <h:panelGrid style="margin: 0 auto;">
+            <h2>Departures:</h2>
+            <h:dataTable rules="all" value="#{scheduleController.getScheduleDto().from}" var="board">
 
-    <h:form id="scheduleForm">
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Board"/>
+                    </f:facet>
+                    <h:outputText value="#{board.name}"/>
+                </h:column>
 
-        <h:outputText value="Schedule for station #{scheduleController.getNewScheduleDto().name}:"/><br/><br/>
-        <h:outputText value="Departures:"/><br/>
-        <h:outputText value=""/>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Departure"/>
+                    </f:facet>
+                    <h:outputText value="#{board.departure}"/>
+                </h:column>
 
-        <h:dataTable value="#{scheduleController.getScheduleDto().from}" var="board">
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Destination"/>
+                    </f:facet>
+                    <h:outputText value="#{board.to}"/>
+                </h:column>
 
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Board name"/>
-                </f:facet>
-                <h:outputText value="#{board.name}"/>
-            </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Status"/>
+                    </f:facet>
+                    <h:outputText value="#{board.status}"/>
+                </h:column>
 
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Departure time"/>
-                </f:facet>
-                <h:outputText value="#{board.departure}"/>
-            </h:column>
+            </h:dataTable>
+            <h2>Arrivals:</h2>
+            <h:dataTable rules="all" value="#{scheduleController.getScheduleDto().to}" var="board">
 
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Destination"/>
-                </f:facet>
-                <h:outputText value="#{board.to}"/>
-            </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Board"/>
+                    </f:facet>
+                    <h:outputText value="#{board.name}"/>
+                </h:column>
 
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Status"/>
-                </f:facet>
-                <h:outputText value="#{board.status}"/>
-            </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Expected"/>
+                    </f:facet>
+                    <h:outputText value="#{board.expectedArrival}"/>
+                </h:column>
 
-        </h:dataTable>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Origin"/>
+                    </f:facet>
+                    <h:outputText value="#{board.from}"/>
+                </h:column>
 
-        <br/><h:outputText value="Arrivals:"/><br/>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Arrival"/>
+                    </f:facet>
+                    <h:outputText value="#{board.arrival}"/>
+                </h:column>
 
-        <h:dataTable value="#{scheduleController.getScheduleDto().to}" var="board">
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Status"/>
+                    </f:facet>
+                    <h:outputText value="#{board.status}"/>
+                </h:column>
 
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Board name"/>
-                </f:facet>
-                <h:outputText value="#{board.name}"/>
-            </h:column>
+            </h:dataTable>
 
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Expected arrival"/>
-                </f:facet>
-                <h:outputText value="#{board.expectedArrival}"/>
-            </h:column>
-
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Origin"/>
-                </f:facet>
-                <h:outputText value="#{board.from}"/>
-            </h:column>
-
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Arrival"/>
-                </f:facet>
-                <h:outputText value="#{board.arrival}"/>
-            </h:column>
-
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Status"/>
-                </f:facet>
-                <h:outputText value="#{board.status}"/>
-            </h:column>
-
-        </h:dataTable>
-
-    </h:form>
-
-    <a4j:poll interval="900" render=":scheduleForm"/>
-
+    </h:panelGrid>
+</h:form>
+    <a4j:poll interval="900" render=":myForm"/>
 </h:body>
-
 </html>
