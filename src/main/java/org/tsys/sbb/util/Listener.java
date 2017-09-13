@@ -26,7 +26,7 @@ public class Listener implements MessageListener {
     @EJB
     private ScheduleController scheduleController;
 
-    private static final Logger logger = LoggerFactory.getLogger(Listener.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(Listener.class);
 
 
     @PostConstruct
@@ -49,18 +49,18 @@ public class Listener implements MessageListener {
             receiver.setMessageListener(this);
 
         } catch (Exception e) {
-            logger.info("Error during message receiving");
+            LOGGER.info("Error during message receiving");
         }
     }
 
     @Override
     public void onMessage(Message message) {
-        logger.info("Got a new message! Getting new schedule");
+        LOGGER.info("Got a new message! Getting new schedule");
         try {
             scheduleController.receiveSchedule();
-            logger.info("Schedule renewed");
+            LOGGER.info("Schedule renewed");
         } catch (Exception e) {
-            logger.info("Problem with the ScheduleController!");
+            LOGGER.info("Problem with the ScheduleController!");
         }
     }
 
@@ -71,7 +71,7 @@ public class Listener implements MessageListener {
             session.close();
             connection.close();
         } catch (JMSException e) {
-            logger.info("Error during listener destroying");
+            LOGGER.info("Error during listener destroying");
         }
     }
 }

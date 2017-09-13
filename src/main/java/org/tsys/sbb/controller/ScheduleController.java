@@ -25,7 +25,7 @@ public class ScheduleController {
 
     private ScheduleDto scheduleDto;
 
-    private static final Logger logger = LoggerFactory.getLogger(ScheduleController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ScheduleController.class);
 
     public void receiveSchedule() {
 
@@ -45,13 +45,13 @@ public class ScheduleController {
             scheduleDto = newScheduleDto;
         }
 
-        logger.info("Updated");
+        LOGGER.info("Updated");
     }
 
     public ScheduleDto getNewScheduleDto(){
 
         if (Calendar.getInstance().get(Calendar.SECOND) < 1) {
-            logger.info("Time to update!");
+            LOGGER.info("Time to update!");
             receiveSchedule();
         }
 
@@ -63,13 +63,13 @@ public class ScheduleController {
     }
 
     public ScheduleController() {
-        logger.info("Creating controller");
+        LOGGER.info("Creating controller");
         receiveSchedule();
     }
 
     public String setId(int id) {
         this.id = id;
-        logger.info("ID changed to " + id);
+        LOGGER.info("ID changed to {}", id);
         receiveSchedule();
         return "schedule";
     }

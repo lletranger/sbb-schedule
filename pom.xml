@@ -8,16 +8,12 @@
   <name>sbb-schedule Maven Webapp</name>
   <url>http://maven.apache.org</url>
   <dependencies>
+
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>3.8.1</version>
       <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.sun.jersey</groupId>
-      <artifactId>jersey-client</artifactId>
-      <version>1.19.4</version>
     </dependency>
 
     <dependency>
@@ -37,37 +33,43 @@
       <artifactId>jackson-databind</artifactId>
       <version>2.6.3</version>
     </dependency>
+
     <dependency>
       <groupId>com.sun.faces</groupId>
       <artifactId>jsf-api</artifactId>
       <version>2.1.7</version>
     </dependency>
+
     <dependency>
       <groupId>com.sun.faces</groupId>
       <artifactId>jsf-impl</artifactId>
       <version>2.1.7</version>
     </dependency>
-    <!-- https://mvnrepository.com/artifact/javax/javaee-api -->
+
     <dependency>
       <groupId>javax</groupId>
       <artifactId>javaee-api</artifactId>
       <version>7.0</version>
     </dependency>
+
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
       <version>1.16.16</version>
     </dependency>
+
     <dependency>
       <groupId>org.richfaces</groupId>
       <artifactId>richfaces-a4j</artifactId>
       <version>4.5.17.Final</version>
     </dependency>
-      <dependency>
-          <groupId>org.richfaces</groupId>
-          <artifactId>richfaces</artifactId>
-          <version>4.5.17.Final</version>
-      </dependency>
+
+    <dependency>
+      <groupId>org.richfaces</groupId>
+      <artifactId>richfaces</artifactId>
+      <version>4.5.17.Final</version>
+    </dependency>
+
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>jstl</artifactId>
@@ -97,19 +99,27 @@
       <artifactId>el-ri</artifactId>
       <version>1.0</version>
     </dependency>
+
     <dependency>
       <groupId>org.jetbrains</groupId>
       <artifactId>annotations-java5</artifactId>
       <version>15.0</version>
     </dependency>
+
     <dependency>
     <groupId>javax.validation</groupId>
     <artifactId>validation-api</artifactId>
     <version>2.0.0.CR3</version>
     </dependency>
 
+    <dependency>
+      <groupId>com.sun.jersey</groupId>
+      <artifactId>jersey-client</artifactId>
+      <version>1.19.4</version>
+    </dependency>
 
   </dependencies>
+
   <build>
     <plugins>
       <plugin>
@@ -122,4 +132,5 @@
       </plugin>
     </plugins>
   </build>
+
 </project>

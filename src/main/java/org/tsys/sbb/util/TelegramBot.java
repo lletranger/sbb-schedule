@@ -58,7 +58,7 @@ public class TelegramBot extends TelegramLongPollingBot {
             s = message.getText().replace("/", "");
 
             if (s.equals("start")) {
-                sendMsg(message, "Hello from Middle-Earth Railroads. Seems like a nice day today!\nYou can get list of /stations we are servicing today");
+                sendMsg(message, "Hello from Middle-Earth Railroads. Seems like a nice day today!\nYou can get list of all /stations we are servicing today");
 
             } else if (s.equals("stations")) {
 
