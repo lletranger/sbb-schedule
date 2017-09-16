@@ -90,7 +90,7 @@ public class TelegramBot extends TelegramLongPollingBot {
                 }
 
                 sendMsg(message, "Boards from ".concat(s)
-                        .concat(" today are:\n").concat(schedule.toString())
+                        .concat(" today are:").concat(schedule.toString())
                         .concat("\n Back to /stations"));
             } else {
                 sendMsg(message, "Sorry, I don't understand !\n http://i.giphy.com/chICfOgH8ib16.gif\n");
